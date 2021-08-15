@@ -3,7 +3,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logoPoli from "./img/LogoFPUNA.jpeg"
 import {Button, Col, Container, Form, Image, Row, Table} from "react-bootstrap";
-import {clonarMatriz, crearMatriz, hallarTranspuesta} from "./funciones";
+import {aleatorizarMatriz, clonarMatriz, crearMatriz, hallarTranspuesta} from "./funciones";
 import {TSP} from "./clases";
 
 function App() {
@@ -53,6 +53,10 @@ function App() {
         setRuta(tsp.ruta);
     }
 
+    const aleatorizar = () => {
+        setMatriz(aleatorizarMatriz(-5, 5));
+    }
+
     return (
       <>
         <Container fluid className="m-0">
@@ -86,10 +90,20 @@ function App() {
                                           onChange={setearTamanho}/>
                         </Form.Group>
                         <br/>
-                        <Form.Group>
-                            <Button variant="primary"
-                                    onClick={ejecutarAlgoritmo}>Calcular</Button>
-                        </Form.Group>
+                        <Row>
+                            <Col>
+                                <Form.Group>
+                                    <Button variant="primary"
+                                            onClick={ejecutarAlgoritmo}>Calcular</Button>
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group>
+                                    <Button variant="secondary"
+                                            onClick={aleatorizar}>Aleatorio</Button>
+                                </Form.Group>
+                            </Col>
+                        </Row>
                     </Form>
                 </Col>
             </Row>
