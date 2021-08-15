@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/App.css"],"names":[],"mappings":"AAAA,MACI,aAAc,CACd,eAAgB,CAChB,SACJ","file":"main.1a5ec180.chunk.css","sourcesContent":[".logo {\n    display: block;\n    margin-top: 16px;\n    width: 40%;\n}\n"]}
