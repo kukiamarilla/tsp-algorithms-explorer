@@ -12,7 +12,7 @@ class Punto {
 
     // determina si los segmentos ab y cd se intersectan
     static intersect (a, b, c, d) {
-        return this.ccw(a,c,d) != this.ccw(b,c,d) && this.ccw(a,b,c) != this.ccw(a,b,d);
+        return this.ccw(a,c,d) !== this.ccw(b,c,d) && this.ccw(a,b,c) !== this.ccw(a,b,d);
     }
 }
 
@@ -20,7 +20,7 @@ export class TSP {
     // Procesa dos listas de puntos
     constructor (x, y) {
         var n = x.length;
-        console.assert(x.length == y.length, "Error: x.length != y.length");
+        console.assert(x.length === y.length, "Error: x.length != y.length");
 
         // almacena las coordenadas de cada punto
         var p = Array(n);
@@ -30,7 +30,7 @@ export class TSP {
 
         // calcula la matriz de distancias
         var dist = Array(n);
-        for (var i = 0; i < n; i++) {
+        for (let i = 0; i < n; i++) {
             dist[i] = Array(n);
             for (var j = 0; j < n; j++) {
                 dist[i][j] = Math.sqrt((p[i].x - p[j].x) ** 2 + (p[i].y - p[j].y) ** 2);
@@ -53,12 +53,12 @@ export class TSP {
 
         // nodos sin visitar
         var unv = Array(n-1);
-        for (var i = 1; i < n; i++) {
+        for (let i = 1; i < n; i++) {
             unv[i - 1] = i;
         }
 
         // por cada nodo restante
-        for (var i = 1; i < n; i++) {
+        for (let i = 1; i < n; i++) {
             // halla el nodo mas cercano
             var min = 0;
             for (var j = 1; j < unv.length; j++) {
@@ -119,7 +119,7 @@ export class TSP {
         // visita el nodo actual
         this.actual[nodosVisitados] = nodoActual;
         this.visitados[nodoActual] = true;
-        if (nodosVisitados+1 == this.n) {
+        if (nodosVisitados+1 === this.n) {
             // evalua la ruta actual
             var longitud_actual = this.evaluarRuta(this.actual);
             if (longitud_actual < this.longitud) {
