@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.1a5ec180.chunk.css",
-    "main.js": "/static/js/main.994ed513.chunk.js",
-    "main.js.map": "/static/js/main.994ed513.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.644454ba.js",
-    "runtime-main.js.map": "/static/js/runtime-main.644454ba.js.map",
-    "static/css/2.da1eef19.chunk.css": "/static/css/2.da1eef19.chunk.css",
-    "static/js/2.94389ec5.chunk.js": "/static/js/2.94389ec5.chunk.js",
-    "static/js/2.94389ec5.chunk.js.map": "/static/js/2.94389ec5.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/2.da1eef19.chunk.css.map": "/static/css/2.da1eef19.chunk.css.map",
-    "static/css/main.1a5ec180.chunk.css.map": "/static/css/main.1a5ec180.chunk.css.map",
-    "static/js/2.94389ec5.chunk.js.LICENSE.txt": "/static/js/2.94389ec5.chunk.js.LICENSE.txt",
-    "static/media/LogoFPUNA.13d083ff.jpeg": "/static/media/LogoFPUNA.13d083ff.jpeg"
+    "main.css": "/tsp-algorithms-explorer/static/css/main.1a5ec180.chunk.css",
+    "main.js": "/tsp-algorithms-explorer/static/js/main.26a344d0.chunk.js",
+    "main.js.map": "/tsp-algorithms-explorer/static/js/main.26a344d0.chunk.js.map",
+    "runtime-main.js": "/tsp-algorithms-explorer/static/js/runtime-main.05b619ad.js",
+    "runtime-main.js.map": "/tsp-algorithms-explorer/static/js/runtime-main.05b619ad.js.map",
+    "static/css/2.da1eef19.chunk.css": "/tsp-algorithms-explorer/static/css/2.da1eef19.chunk.css",
+    "static/js/2.08df138f.chunk.js": "/tsp-algorithms-explorer/static/js/2.08df138f.chunk.js",
+    "static/js/2.08df138f.chunk.js.map": "/tsp-algorithms-explorer/static/js/2.08df138f.chunk.js.map",
+    "index.html": "/tsp-algorithms-explorer/index.html",
+    "static/css/2.da1eef19.chunk.css.map": "/tsp-algorithms-explorer/static/css/2.da1eef19.chunk.css.map",
+    "static/css/main.1a5ec180.chunk.css.map": "/tsp-algorithms-explorer/static/css/main.1a5ec180.chunk.css.map",
+    "static/js/2.08df138f.chunk.js.LICENSE.txt": "/tsp-algorithms-explorer/static/js/2.08df138f.chunk.js.LICENSE.txt",
+    "static/media/LogoFPUNA.13d083ff.jpeg": "/tsp-algorithms-explorer/static/media/LogoFPUNA.13d083ff.jpeg"
   },
   "entrypoints": [
-    "static/js/runtime-main.644454ba.js",
+    "static/js/runtime-main.05b619ad.js",
     "static/css/2.da1eef19.chunk.css",
-    "static/js/2.94389ec5.chunk.js",
+    "static/js/2.08df138f.chunk.js",
     "static/css/main.1a5ec180.chunk.css",
-    "static/js/main.994ed513.chunk.js"
+    "static/js/main.26a344d0.chunk.js"
   ]
 }
