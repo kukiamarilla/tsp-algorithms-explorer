@@ -47,6 +47,8 @@ function App() {
                 tsp.avaro();
                 tsp.optimizar();
                 break;
+            default:
+                break;
         }
         setRuta(tsp.ruta);
     }
@@ -92,13 +94,21 @@ function App() {
                 </Col>
             </Row>
             <Row style={{margin: 8}}>
-                <h3>Costos</h3>
+                <h3>Coordenadas</h3>
                 <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th>Ciudad / Coordenada </th>
+                            <th>Coordenada X</th>
+                            <th>Coordenada Y</th>
+                        </tr>
+                    </thead>
                     <tbody>
                     {
                         matriz.map( (fila, indexFila = 1) => {
                             return (
                                 <tr key={indexFila}>
+                                    <td>M{indexFila}</td>
                                     {
                                         fila.map( (columna, indexColumna = 1) => {
                                             return (
