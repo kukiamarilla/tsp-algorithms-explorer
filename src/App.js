@@ -3,12 +3,14 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logoPoli from "./img/LogoFPUNA.jpeg"
 import {Button, Col, Container, Form, Image, Row, Table} from "react-bootstrap";
-import {clonarMatriz, crearMatriz} from "./funciones";
+import {clonarMatriz, crearMatriz, hallarTranspuesta} from "./funciones";
+import {TSP} from "./clases";
 
 function App() {
     const [algoritmo, setAlgoritmo] = useState(0)
-    const [tamanho, setTamanho] = useState(1)
-    const [matriz, setMatriz] = useState(crearMatriz(1))
+    const [tamanho, setTamanho] = useState(4)
+    const [matriz, setMatriz] = useState(crearMatriz(4))
+    const [ruta, setRuta] = useState(" ")
 
     const setearTamanho = (event) => {
         const n = parseInt(event.target.value);
@@ -30,7 +32,23 @@ function App() {
     }
 
     const ejecutarAlgoritmo = () => {
-        // DO SOMETHING
+        const transpuesta = hallarTranspuesta(matriz);
+        const tsp = new TSP(transpuesta[0], transpuesta[1]);
+        switch (algoritmo) {
+            case '1':
+                // Backtracking
+                tsp.backtracking();
+                break;
+            case '2':
+                // Algoritmo de las vegas
+                break;
+            case '3':
+                // Avaro + 2-opt local
+                tsp.avaro();
+                tsp.optimizar();
+                break;
+        }
+        setRuta(tsp.ruta);
     }
 
     return (
@@ -88,7 +106,6 @@ function App() {
                                                     <Form.Control type="number"
                                                                   value={matriz[indexFila][indexColumna]}
                                                                   onChange={setearCosto(indexFila, indexColumna)}
-                                                                  disabled={indexFila == indexColumna}
                                                     />
                                                 </td>
                                             )
@@ -102,7 +119,7 @@ function App() {
                 </Table>
             </Row>
             <Row style={{margin: 8}}>
-                {/* Aca por ahi poner el Resultado*/}
+                { ruta }
             </Row>
         </Container>
       </>
