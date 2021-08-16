@@ -53,7 +53,7 @@ function App() {
             case '3':
                 // Avaro + 2-opt local
                 tsp.avaro();
-                tsp.optimizar();
+                tsp.optimizar_profundo();
                 break;
             default:
                 break;
@@ -61,7 +61,7 @@ function App() {
         let t1 = performance.now();
         console.log(`Tiempo ${t1-t0} ms`)
         setRuta(tsp.ruta);
-        setCosto(calcularCosto(matriz, tsp.ruta));
+        setCosto(tsp.evaluarRuta(tsp.ruta));
         setTiempo(t1-t0);
     }
 

@@ -74,7 +74,35 @@ export class TSP {
         this.ruta = ruta;
     }
 
-    optimizar () {
+    optimizar_n (veces) {
+        var n = this.n;
+        var r = this.ruta;
+        var p = this.puntos;
+
+        // repite la optimización n veces
+        var repetir;
+        for (var i = 0; i < veces; i++) {
+            repetir = false;
+
+            // por cada par de aristas en la ruta
+            for (var a = 0; a < n - 2; a++) {
+                var b = a + 1;
+                for (var c = b + 1; c < n; c++) {
+                    var d = c + 1;
+
+                    // si se intersectan reconecta las aristas
+                    if (Punto.intersect(p[r[a]], p[r[b]], p[r[c]], p[r[d % n]])) {
+                        r = r.slice(0, b).concat(r.slice(b, d).reverse()).concat(r.slice(d));
+                        repetir = true;
+                    }
+                }
+            }
+        }
+        
+        this.ruta = r;
+    }
+
+    optimizar_profundo () {
         var n = this.n;
         var r = this.ruta;
         var p = this.puntos;
@@ -122,7 +150,6 @@ export class TSP {
     }
 
     backtrack (nodoActual, nodosVisitados) {
-        //console.log("visitando: ", nodoActual);
         // visita el nodo actual
         this.actual[nodosVisitados] = nodoActual;
         this.visitados[nodoActual] = true;
