@@ -144,12 +144,15 @@ function App() {
                 <Col>
                     <Form.Group>
                         <Form.Label>Ruta</Form.Label>
-                        {ruta.length === tamanho
+                        {ruta.length === tamanho && ruta.length > 0
                             ? <Form.Control as="textarea" value={ruta.reduce(rutaString)} readOnly/>
                             : <Form.Control value="No disponible" readOnly />
                         }
                     </Form.Group>
                 </Col>
+            </Row>
+            <Row style={{margin: 8}}>
+                <Grafico matriz={matriz} ruta={ruta}/>
             </Row>
             <Row style={{margin: 8}}>
                 <h3>Coordenadas</h3>
@@ -185,9 +188,6 @@ function App() {
                     }
                     </tbody>
                 </Table>
-            </Row>
-            <Row style={{margin: 8}}>
-                <Grafico matriz={matriz} ruta={ruta}/>
             </Row>
         </Container>
       </>
