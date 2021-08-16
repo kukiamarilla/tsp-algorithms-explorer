@@ -5,6 +5,7 @@ import logoPoli from "./img/LogoFPUNA.jpeg"
 import {Button, Col, Container, Form, Image, Row, Table} from "react-bootstrap";
 import {aleatorizarMatriz, calcularCosto, clonarMatriz, crearMatriz, hallarTranspuesta, rutaString} from "./funciones";
 import {TSP} from "./clases";
+import Grafico from './Grafico';
 
 function App() {
     const [algoritmo, setAlgoritmo] = useState(0);
@@ -179,6 +180,9 @@ function App() {
                     }
                     </tbody>
                 </Table>
+            </Row>
+            <Row style={{margin: 8}}>
+                <Grafico matriz={matriz} ruta={ruta}/>
             </Row>
         </Container>
       </>
