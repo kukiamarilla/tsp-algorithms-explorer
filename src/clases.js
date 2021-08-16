@@ -5,14 +5,36 @@ class Punto {
         this.y = y;
     }
 
-    // determina si tres puntos estan en sentido antihorario
-    static ccw (a, b, c) {
-        return (c.y-a.y)*(b.x-a.x) > (b.y-a.y)*(c.x-a.x);
+    // determina la orientación de los tres puntos (> 0 significa antihorario)
+    static orientacion (a, b, c) {
+        var val = (c.y-a.y)*(b.x-a.x) - (b.y-a.y)*(c.x-a.x)
+        if (val > 0) {
+            return 1;
+        } else if (val === 0) {
+            return 0;
+        } else {
+            return -1;
+        }
+    }
+
+    // si a, b y c son colineares determina si el segmento ab contiene el punto c
+    static contiene (a, b, c) {
+        return c.x <= Math.max(a.x, b.x) && c.x >= Math.min(a.x, b.x)
+            && c.y <= Math.max(a.y, b.y) && c.y >= Math.min(a.y, b.y);
     }
 
     // determina si los segmentos ab y cd se intersectan
-    static intersect (a, b, c, d) {
-        return this.ccw(a,c,d) !== this.ccw(b,c,d) && this.ccw(a,b,c) !== this.ccw(a,b,d);
+    static intersectan (a, b, c, d) {
+        var o1 = this.orientacion(a,c,d);
+        var o2 = this.orientacion(b,c,d);
+        var o3 = this.orientacion(a,b,c);
+        var o4 = this.orientacion(a,b,d);
+        if (o1 !== o2 && o3 !== o4) return true;
+        if (o1 === 0 && this.contiene(c, d, a)) return true;
+        if (o2 === 0 && this.contiene(c, d, b)) return true;
+        if (o3 === 0 && this.contiene(a, b, c)) return true;
+        if (o4 === 0 && this.contiene(a, b, d)) return true;
+        return false;
     }
 }
 
@@ -103,6 +125,7 @@ export class TSP {
         var n = this.n;
         var r = this.ruta;
         var p = this.puntos;
+        var dist = this.distancias;
 
         // repite hasta que no sea posible optimizar la ruta
         var repetir;
@@ -116,9 +139,13 @@ export class TSP {
                     var d = c + 1;
 
                     // si se intersectan reconecta las aristas
-                    if (Punto.intersect(p[r[a]], p[r[b]], p[r[c]], p[r[d % n]])) {
-                        r = r.slice(0, b).concat(r.slice(b, d).reverse()).concat(r.slice(d));
-                        repetir = true;
+                    if (Punto.intersectan(p[r[a]], p[r[b]], p[r[c]], p[r[d % n]])) {
+                        var d1 = dist[r[a]][r[b]] + dist[r[c]][r[d % n]];
+                        var d2 = dist[r[a]][r[c]] + dist[r[b]][r[d % n]];
+                        if (d2 < d1) {
+                            r = r.slice(0, b).concat(r.slice(b, d).reverse()).concat(r.slice(d));
+                            repetir = true;
+                        }
                     }
                 }
             }
