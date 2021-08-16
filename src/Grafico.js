@@ -2,8 +2,8 @@ import React from 'react';
 import Sketch from 'react-p5';
 
 
-let scale = 50
-let radius = 40
+let scale = 25
+let radius = 20
 let padding = 100 + 5 * scale
 
 const drawNode = (p5, x, y, idx) => {
@@ -57,6 +57,7 @@ const Grafico = ({matriz, ruta}) => {
             if(step > ruta.length ) step = 0;
         } else {
             matriz.forEach((el, idx) => {
+                p5.fill(255)
                 drawNode(p5, el[0], el[1], idx)
             });
         }

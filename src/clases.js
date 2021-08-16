@@ -166,7 +166,7 @@ export class TSP {
         this.visitados[nodoActual] = true;
 		
 		// recorrido escogiendo nodos aleatorios
-		while (nodosVisitados + 1 != this.n){
+		while (nodosVisitados + 1 !== this.n){
 		
 			if (!this.visitados[i]) {
 				nodosVisitados = nodosVisitados + 1;
