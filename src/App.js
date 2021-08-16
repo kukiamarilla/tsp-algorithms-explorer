@@ -66,7 +66,7 @@ function App() {
     }
 
     const aleatorizar = () => {
-        setMatriz(aleatorizarMatriz(-10, 10));
+        setMatriz(aleatorizarMatriz(-5, 5));
     }
 
     return (
