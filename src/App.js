@@ -5,12 +5,13 @@ import logoPoli from "./img/LogoFPUNA.jpeg"
 import {Button, Col, Container, Form, Image, Row, Table} from "react-bootstrap";
 import {aleatorizarMatriz, clonarMatriz, crearMatriz, hallarTranspuesta} from "./funciones";
 import {TSP} from "./clases";
+import Grafico from './Grafico';
 
 function App() {
     const [algoritmo, setAlgoritmo] = useState(0)
     const [tamanho, setTamanho] = useState(4)
     const [matriz, setMatriz] = useState(crearMatriz(4))
-    const [ruta, setRuta] = useState(" ")
+    const [ruta, setRuta] = useState("")
 
     const setearTamanho = (event) => {
         const n = parseInt(event.target.value);
@@ -143,7 +144,7 @@ function App() {
                 </Table>
             </Row>
             <Row style={{margin: 8}}>
-                { ruta }
+                <Grafico matriz={matriz} ruta={ruta}/>
             </Row>
         </Container>
       </>
