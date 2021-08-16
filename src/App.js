@@ -3,20 +3,25 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logoPoli from "./img/LogoFPUNA.jpeg"
 import {Button, Col, Container, Form, Image, Row, Table} from "react-bootstrap";
-import {aleatorizarMatriz, clonarMatriz, crearMatriz, hallarTranspuesta} from "./funciones";
+import {aleatorizarMatriz, calcularCosto, clonarMatriz, crearMatriz, hallarTranspuesta, rutaString} from "./funciones";
 import {TSP} from "./clases";
 
 function App() {
-    const [algoritmo, setAlgoritmo] = useState(0)
-    const [tamanho, setTamanho] = useState(4)
-    const [matriz, setMatriz] = useState(crearMatriz(4))
-    const [ruta, setRuta] = useState(" ")
+    const [algoritmo, setAlgoritmo] = useState(0);
+    const [tamanho, setTamanho] = useState(4);
+    const [matriz, setMatriz] = useState(crearMatriz(4));
+    const [ruta, setRuta] = useState([]);
+    const [tiempo, setTiempo] = useState(0.0);
+    const [costo, setCosto] = useState(0.0);
 
     const setearTamanho = (event) => {
         const n = parseInt(event.target.value);
         setTamanho(n);
-        const nuevaMatriz = crearMatriz(n);
-        setMatriz(nuevaMatriz);
+
+        if (!isNaN(n)) {
+            const nuevaMatriz = crearMatriz(n);
+            setMatriz(nuevaMatriz);
+        }
     }
 
     const setearCosto = (fila, columna) => (event) => {
@@ -34,6 +39,7 @@ function App() {
     const ejecutarAlgoritmo = () => {
         const transpuesta = hallarTranspuesta(matriz);
         const tsp = new TSP(transpuesta[0], transpuesta[1]);
+        let t0 = performance.now();
         switch (algoritmo) {
             case '1':
                 // Backtracking
@@ -51,11 +57,15 @@ function App() {
             default:
                 break;
         }
+        let t1 = performance.now();
+        console.log(`Tiempo ${t1-t0} ms`)
         setRuta(tsp.ruta);
+        setCosto(calcularCosto(matriz, tsp.ruta));
+        setTiempo(t1-t0);
     }
 
     const aleatorizar = () => {
-        setMatriz(aleatorizarMatriz(-5, 5));
+        setMatriz(aleatorizarMatriz(-10, 10));
     }
 
     return (
@@ -108,6 +118,32 @@ function App() {
                     </Form>
                 </Col>
             </Row>
+            <Row style={{margin: 16}}>
+                <Col sm={6}>
+                    <Form>
+                        <Form.Group>
+                            <Form.Label>Tiempo de Ejecución</Form.Label>
+                            <Form.Control value={`${Number(tiempo.toFixed(2))} ms`} readOnly/>
+                        </Form.Group>
+                        <br/>
+                        <Form.Group>
+                            <Form.Label>Costo del camino</Form.Label>
+                            <Form.Control value={ruta.length === tamanho
+                                ? costo
+                                : "0"} readOnly/>
+                        </Form.Group>
+                    </Form>
+                </Col>
+                <Col>
+                    <Form.Group>
+                        <Form.Label>Ruta</Form.Label>
+                        {ruta.length === tamanho
+                            ? <Form.Control as="textarea" value={ruta.reduce(rutaString)} readOnly/>
+                            : <Form.Control value="No disponible" readOnly />
+                        }
+                    </Form.Group>
+                </Col>
+            </Row>
             <Row style={{margin: 8}}>
                 <h3>Coordenadas</h3>
                 <Table striped bordered hover>
@@ -142,9 +178,6 @@ function App() {
                     }
                     </tbody>
                 </Table>
-            </Row>
-            <Row style={{margin: 8}}>
-                { ruta }
             </Row>
         </Container>
       </>
