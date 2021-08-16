@@ -14,9 +14,12 @@ function App() {
     const [ruta, setRuta] = useState([]);
     const [tiempo, setTiempo] = useState(0.0);
     const [costo, setCosto] = useState(0.0);
+    const [expandidos, setExpandidos] = useState(0);
+    const [mostrarGrafico, setMostrarGrafico] = useState(false);
 
     const setearTamanho = (event) => {
         const n = parseInt(event.target.value);
+        setMostrarGrafico(false);
         setTamanho(n);
 
         if (!isNaN(n)) {
@@ -67,6 +70,7 @@ function App() {
         setRuta(tsp.ruta);
         setCosto(tsp.evaluarRuta(tsp.ruta));
         setTiempo(t1-t0);
+        setExpandidos(tsp.expandidos);
     }
 
     const aleatorizar = () => {
@@ -139,17 +143,32 @@ function App() {
                                 ? costo
                                 : "0"} readOnly/>
                         </Form.Group>
+                        <br/>
+                        <Form.Group>
+                            <Form.Label>Nodos expandidos</Form.Label>
+                            <Form.Control value={expandidos} readOnly/>
+                        </Form.Group>
                     </Form>
                 </Col>
                 <Col>
                     <Form.Group>
                         <Form.Label>Ruta</Form.Label>
-                        {ruta.length === tamanho
-                            ? <Form.Control as="textarea" value={ruta.reduce(rutaString)} readOnly/>
+                        {ruta.length === tamanho && ruta.length > 0
+                            ? <Form.Control as="textarea"
+                                            value={ruta.reduce(rutaString)}
+                                            rows={9}
+                                            readOnly/>
                             : <Form.Control value="No disponible" readOnly />
                         }
                     </Form.Group>
                 </Col>
+            </Row>
+            <Row style={{margin: 8}}>
+                {mostrarGrafico
+                    ?  <Grafico matriz={matriz} ruta={ruta}/>
+                    :  <Button variant="success"
+                               onClick={ () => {setMostrarGrafico(true)} }>Mostrar Gráfico</Button>
+                }
             </Row>
             <Row style={{margin: 8}}>
                 <h3>Coordenadas</h3>
@@ -185,9 +204,6 @@ function App() {
                     }
                     </tbody>
                 </Table>
-            </Row>
-            <Row style={{margin: 8}}>
-                <Grafico matriz={matriz} ruta={ruta}/>
             </Row>
         </Container>
       </>
