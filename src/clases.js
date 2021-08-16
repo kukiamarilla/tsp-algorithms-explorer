@@ -67,10 +67,12 @@ export class TSP {
     avaro () {
         var n = this.n;
         var dist = this.distancias;
+        this.expandidos = 0;
 
         // comienza en el nodo 0
         var ruta = Array(n);
         ruta[0] = 0;
+        this.expandidos = this.expandidos + 1;
         var last = 0;
 
         // nodos sin visitar
@@ -91,6 +93,7 @@ export class TSP {
 
             // agrega el nodo a la ruta
             ruta[i] = unv[min];
+            this.expandidos = this.expandidos + 1;
             unv.splice(min, 1);
         }
         this.ruta = ruta;
@@ -117,7 +120,7 @@ export class TSP {
                 }
             }
         }
-        
+
         this.ruta = r;
     }
 
@@ -145,12 +148,13 @@ export class TSP {
                         if (d2 < d1) {
                             r = r.slice(0, b).concat(r.slice(b, d).reverse()).concat(r.slice(d));
                             repetir = true;
+                            this.expandidos = this.expandidos + 1;
                         }
                     }
                 }
             }
         } while (repetir);
-        
+
         this.ruta = r;
     }
 
@@ -163,6 +167,9 @@ export class TSP {
 
         // longitud de la ruta
         this.longitud = Infinity;
+
+        // nodos expandidos
+        this.expandidos = 0;
 
         // comienza con el primer nodo
         if (primero) {
@@ -179,6 +186,7 @@ export class TSP {
 
     backtrack (nodoActual, nodosVisitados) {
         // visita el nodo actual
+        this.expandidos = this.expandidos + 1;
         this.actual[nodosVisitados] = nodoActual;
         this.visitados[nodoActual] = true;
         if (nodosVisitados+1 === this.n) {
@@ -204,6 +212,7 @@ export class TSP {
 
     backtrack_primero (nodoActual, nodosVisitados) {
         // visita el nodo actual
+        this.expandidos = this.expandidos + 1;
         this.actual[nodosVisitados] = nodoActual;
         this.visitados[nodoActual] = true;
         if (nodosVisitados+1 === this.n) {
@@ -226,7 +235,7 @@ export class TSP {
         // desvisita el nodo actual
         this.visitados[nodoActual] = false;
     }
-	
+
 	lasvegas () {
         // ruta actual
         this.actual = Array(this.n);
@@ -245,26 +254,26 @@ export class TSP {
         delete this.longitud;
 
     }
-	
+
 	algolasvegas (nodoActual, nodosVisitados) {
-        var i = Math.floor(Math.random() * this.n);
-		
+        let i = Math.floor(Math.random() * this.n);
+		this.expandidos = 0;
 		this.actual[nodosVisitados] = nodoActual;
         this.visitados[nodoActual] = true;
-		
+
 		// recorrido escogiendo nodos aleatorios
 		while (nodosVisitados + 1 !== this.n){
-		
+
 			if (!this.visitados[i]) {
 				nodosVisitados = nodosVisitados + 1;
-				
+				this.expandidos = this.expandidos + 1;
 				this.actual[nodosVisitados] = i;
 				this.visitados[i] = true;
 			}
-		
+
 			i = Math.floor(Math.random() * this.n)
 		}
-		
+
         // evalua la ruta actual
         var longitud_actual = this.evaluarRuta(this.actual);
 		this.ruta = this.actual.slice();
