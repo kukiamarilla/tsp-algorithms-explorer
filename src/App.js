@@ -105,7 +105,8 @@ function App() {
                             <Col>
                                 <Form.Group>
                                     <Button variant="primary"
-                                            onClick={ejecutarAlgoritmo}>Calcular</Button>
+                                            onClick={ejecutarAlgoritmo}
+                                            disabled={algoritmo === 0}>Calcular</Button>
                                 </Form.Group>
                             </Col>
                             <Col>
