@@ -2,8 +2,8 @@ import React from 'react';
 import Sketch from 'react-p5';
 
 
-let scale = 25
-let radius = 20
+let scale = 50
+let radius = 40
 let padding = 100 + 5 * scale
 
 const drawNode = (p5, x, y, idx) => {
