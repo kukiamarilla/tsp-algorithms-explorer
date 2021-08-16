@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/index.css","webpack://src/App.css"],"names":[],"mappings":"AAAA,OACI,kBACJ,CCFA,MACI,aAAc,CACd,eAAgB,CAChB,SACJ","file":"main.f39fa2ae.chunk.css","sourcesContent":["canvas {\n    border-radius: 20px;\n}",".logo {\n    display: block;\n    margin-top: 16px;\n    width: 40%;\n}\n"]}
