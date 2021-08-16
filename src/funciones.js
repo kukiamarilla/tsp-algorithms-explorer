@@ -23,3 +23,22 @@ export const aleatorizarMatriz = (min, max) => matriz => {
     }
     return copia;
 }
+
+export const calcularCosto = (matriz, ruta) => {
+    let costo = 0;
+    for (let i=0; i < ruta.length - 1; i++) {
+        const A = matriz[i];
+        const B = matriz[i+1];
+        const dist = (A[0] - B[0]) ** 2 + (A[1] - B[1]) ** 2;
+        costo = costo + Math.sqrt(dist);
+    }
+    // Agregar la vuelta
+    const A = matriz[0];
+    const B = matriz[ruta.length - 1];
+    const dist = (A[0] - B[0]) ** 2 + (A[1] - B[1]) ** 2;
+    costo = costo + Math.sqrt(dist);
+
+    return costo;
+}
+
+export const rutaString = (acc, valor) => `${acc} -> ${valor}`
