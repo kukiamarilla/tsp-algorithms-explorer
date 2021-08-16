@@ -80,9 +80,7 @@ export class TSP {
         var p = this.puntos;
 
         // repite la optimización n veces
-        var repetir;
         for (var i = 0; i < veces; i++) {
-            repetir = false;
 
             // por cada par de aristas en la ruta
             for (var a = 0; a < n - 2; a++) {
@@ -93,7 +91,6 @@ export class TSP {
                     // si se intersectan reconecta las aristas
                     if (Punto.intersect(p[r[a]], p[r[b]], p[r[c]], p[r[d % n]])) {
                         r = r.slice(0, b).concat(r.slice(b, d).reverse()).concat(r.slice(d));
-                        repetir = true;
                     }
                 }
             }
@@ -125,7 +122,7 @@ export class TSP {
                     }
                 }
             }
-        } while (repetir == true);
+        } while (repetir);
         
         this.ruta = r;
     }

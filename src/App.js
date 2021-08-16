@@ -3,7 +3,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logoPoli from "./img/LogoFPUNA.jpeg"
 import {Button, Col, Container, Form, Image, Row, Table} from "react-bootstrap";
-import {aleatorizarMatriz, calcularCosto, clonarMatriz, crearMatriz, hallarTranspuesta, rutaString} from "./funciones";
+import {aleatorizarMatriz, clonarMatriz, crearMatriz, hallarTranspuesta, rutaString} from "./funciones";
 import {TSP} from "./clases";
 import Grafico from './Grafico';
 
