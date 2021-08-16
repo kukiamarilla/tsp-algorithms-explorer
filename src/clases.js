@@ -154,7 +154,7 @@ export class TSP {
         this.ruta = r;
     }
 
-    backtracking () {
+    backtracking (primero = false) {
         // ruta actual
         this.actual = Array(this.n);
 
@@ -165,7 +165,11 @@ export class TSP {
         this.longitud = Infinity;
 
         // comienza con el primer nodo
-        this.backtrack(0, 0);
+        if (primero) {
+            this.backtrack_primero(0, 0);
+        } else {
+            this.backtrack(0, 0);
+        }
 
         delete this.actual;
         delete this.visitados;
@@ -190,6 +194,31 @@ export class TSP {
             for (var i = 0; i < this.n; i++) {
                 if (!this.visitados[i]) {
                     this.backtrack(i, nodosVisitados+1);
+                }
+            }
+        }
+
+        // desvisita el nodo actual
+        this.visitados[nodoActual] = false;
+    }
+
+    backtrack_primero (nodoActual, nodosVisitados) {
+        // visita el nodo actual
+        this.actual[nodosVisitados] = nodoActual;
+        this.visitados[nodoActual] = true;
+        if (nodosVisitados+1 === this.n) {
+            // evalua la ruta actual
+            var longitud_actual = this.evaluarRuta(this.actual);
+            if (longitud_actual < this.longitud) {
+                this.ruta = this.actual.slice();
+                this.longitud = longitud_actual;
+
+            }
+        } else {
+            // visita los otros nodos
+            for (var i = 0; i < this.n; i++) {
+                if (!this.visitados[i] && this.longitud === Infinity) {
+                    this.backtrack_primero(i, nodosVisitados+1);
                 }
             }
         }
