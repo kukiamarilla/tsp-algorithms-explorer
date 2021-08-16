@@ -139,6 +139,50 @@ export class TSP {
         // desvisita el nodo actual
         this.visitados[nodoActual] = false;
     }
+	
+	lasvegas () {
+        // ruta actual
+        this.actual = Array(this.n);
+
+        // nodos visitados
+        this.visitados = Array(this.n).fill(false);
+
+        // longitud de la ruta
+        this.longitud = Infinity;
+
+        // comienza con un nodo aleatorio
+        this.algolasvegas(Math.floor(Math.random() * this.n), 0);
+
+        delete this.actual;
+        delete this.visitados;
+        delete this.longitud;
+
+    }
+	
+	algolasvegas (nodoActual, nodosVisitados) {
+        var i = Math.floor(Math.random() * this.n);
+		
+		this.actual[nodosVisitados] = nodoActual;
+        this.visitados[nodoActual] = true;
+		
+		// recorrido escogiendo nodos aleatorios
+		while (nodosVisitados + 1 != this.n){
+		
+			if (!this.visitados[i]) {
+				nodosVisitados = nodosVisitados + 1;
+				
+				this.actual[nodosVisitados] = i;
+				this.visitados[i] = true;
+			}
+		
+			i = Math.floor(Math.random() * this.n)
+		}
+		
+        // evalua la ruta actual
+        var longitud_actual = this.evaluarRuta(this.actual);
+		this.ruta = this.actual.slice();
+        this.longitud = longitud_actual;
+    }
 
     evaluarRuta (actual) {
         var longitud = 0;

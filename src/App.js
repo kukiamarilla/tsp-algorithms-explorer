@@ -42,6 +42,7 @@ function App() {
                 break;
             case '2':
                 // Algoritmo de las vegas
+				tsp.lasvegas();
                 break;
             case '3':
                 // Avaro + 2-opt local
