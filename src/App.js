@@ -55,6 +55,10 @@ function App() {
                 tsp.avaro();
                 tsp.optimizar_profundo();
                 break;
+            case '4':
+                // Backtracking 1 solución
+                tsp.backtracking(true);
+                break;
             default:
                 break;
         }
@@ -90,6 +94,7 @@ function App() {
                                          onChange={event => {setAlgoritmo(event.target.value)}}>
                                 <option value={0}>Seleccione el algoritmo</option>
                                 <option value={1}>Backtracking</option>
+                                <option value={4}>Backtracking (1 solución)</option>
                                 <option value={2}>Algoritmo de las vegas</option>
                                 <option value={3}>Avaro + 2-opt local</option>
                             </Form.Select>
